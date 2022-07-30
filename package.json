@@ -1,0 +1,29 @@
+{
+  "name": "comment",
+  "version": "1.0.0",
+  "description": "A pet project to put in my portfolio",
+  "default": "src/index.html",
+  "scripts": {
+    "start": "parcel src/index.html",
+    "build": "parcel build src/index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Horvathhenrietta/comments-and-login.git"
+  },
+  "author": "Henrietta Horvath",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Horvathhenrietta/comments-and-login/issues"
+  },
+  "homepage": "https://github.com/Horvathhenrietta/comments-and-login#readme",
+  "dependencies": {
+    "@popperjs/core": "^2.11.5",
+    "bootstrap": "^5.2.0",
+    "bootstrap-icons": "^1.9.1",
+    "parcel": "^2.6.2"
+  },
+  "devDependencies": {
+    "@parcel/transformer-sass": "^2.6.2"
+  }
+}

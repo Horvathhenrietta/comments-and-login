@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bootstrap w/ Parcel</title>
+    <link rel="stylesheet" href="scss/styles.scss" />
+    <script type="module" src="js/main.js"></script>
+  </head>
+  <body>
+    <main class="vh-100 py-5 bg-main">
+      <div class="container bg-light p-5">
+        <div class="post">
+          <h2 class="post-title">Hello, world!</h2>
+          <p class="post-content">
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Asperiores
+            voluptatum odio expedita quidem blanditiis dignissimos aperiam
+            minima, ipsa dicta impedit necessitatibus molestias ratione. Nisi,
+            magnam repudiandae. Maxime vero et sequi. Lorem ipsum dolor sit,
+            amet consectetur adipisicing elit. Veniam cupiditate sed quam,
+            possimus dolores quibusdam doloribus cumque illum adipisci
+            consequatur dolorum enim consequuntur, culpa aliquid optio id
+            architecto mollitia? Magnam.
+          </p>
+          <p class="post-author">Freya Jones</p>
+          <div class="row">
+            <div class="col-2">
+              <i class="bi bi-chat-left-dots"></i>
+              <p class="comments-number">6 comments</p>
+            </div>
+          </div>
+        </div>
+        <div class="comment-action border-top border-bottom mt-4 py-4">
+          <label for="comment-action-input" class="form-label"
+            >Write a comment</label
+          >
+          <textarea
+            class="form-control"
+            id="comment-action-input"
+            rows="3"
+          ></textarea>
+        </div>
+        <div class="comment-section"></div>
+      </div>
+    </main>
+  </body>
+</html>
