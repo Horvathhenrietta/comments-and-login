@@ -1,7 +1,8 @@
 @import '~bootstrap/scss/bootstrap';
 
 .bg-main {
-  background-image: url(../img/background.jpg);
+  background-image: linear-gradient(to top right, #fc5c7d, #6a82fb);
+  min-height: 100vh;
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
