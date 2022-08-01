@@ -1,4 +1,4 @@
-@import '~bootstrap/scss/bootstrap';
+$primary: #7e22ce;
 
 .bg-main {
   background-image: linear-gradient(to top right, #fc5c7d, #6a82fb);
@@ -7,3 +7,5 @@
   background-repeat: no-repeat;
   background-size: cover;
 }
+
+@import '~bootstrap/scss/bootstrap';
