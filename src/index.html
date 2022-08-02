@@ -9,10 +9,47 @@
     <script type="module" src="js/main.js"></script>
   </head>
   <body class="bg-main">
+
+    
     <nav class="d-flex justify-content-between py-3 container">
-      <h2 class="nav-welcome-message text-light">Hello, Henrietta!</h2>
-      <button class="btn btn-primary px-4">Log In</button>
+      <h2 class="nav-welcome-message">Hello, Henrietta!</h2>
+      <button class="btn btn-primary px-4" data-bs-toggle="modal" data-bs-target="#login-modal">Log In</button>
     </nav>
+
+<!-- Modal -->
+<div class="modal fade" id="login-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Log In</h5>
+        <button type="button" class="btn btn-close" data-bs-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form  class="login-form">
+          <!-- Email input -->
+    <div class="mb-4 form-floating">
+      <input type="email" placeholder="Email adress" id="email" class="form-control" />
+      <label class="form-label" for="#email">Email address</label>
+    </div>
+      <div class="mb-4 form-floating">
+        <input type="password" placeholder="Password" id="password"       class="form-control" />
+        <label class="form-label" for="#password">Password</label>
+      </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" data-bs-dismiss="modal" class="btn btn-primary">Log In</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
     <main class="py-2">
       <div class="container bg-light p-5 rounded-3 shadow">
         <div class="post">
