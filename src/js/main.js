@@ -1,20 +1,17 @@
 import * as bootstrap from 'bootstrap';
 
 // Added bootstraps login modal
-$('#login-modal').on('shown.bs.modal', function () {
-  $('#myInput').trigger('focus');
-});
 
 // ACCOUNTS DATA
 
 const account1 = {
-  owner: Henrietta,
+  owner: 'Henrietta',
   username: 'hh',
   password: 1111,
 };
 
 const account2 = {
-  owner: Daniel,
+  owner: 'Daniel',
   username: 'dd',
   password: 2222,
 };
@@ -54,6 +51,40 @@ const comments = [
 
       If nothing else, just make the survivor a human instead of whatever supernatural it was supposed to be..`,
       },
+      {
+        owner: account3,
+        submitted: new Date('2022-08-30'),
+        content: `Aw man, no! Sunshine was the spiritual sequel to Event Horizon. If you've not seen Event Horizon, 1. you're living wrong and 2. Sunshine becomes a lot more enjoyable if you know the pedigree.`,
+      },
     ],
   },
 ];
+
+// ELEMENTS
+const messageWelcome = document.querySelector('.nav-welcome-message');
+const loginForm = document.querySelector('.login-form');
+const inputUsername = document.querySelector('.input-username');
+const inputPassword = document.querySelector('.input-password');
+
+// LOGIN FUNCTION
+let currentAccount = 0;
+let loggedIn = false;
+
+const displayMessage = function () {
+  messageWelcome.textContent = `Hello, ${currentAccount.owner}!`;
+  messageWelcome.classList.add('visible');
+};
+
+const loginFunction = function (e) {
+  e.preventDefault();
+  currentAccount = accounts.find((acc) => acc.username === inputUsername.value);
+
+  console.log(currentAccount);
+  if (currentAccount.password === +inputPassword.value) {
+    displayMessage();
+    loggedIn = true;
+  } else {
+  }
+};
+
+loginForm.addEventListener('submit', loginFunction);
