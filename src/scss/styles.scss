@@ -12,7 +12,10 @@ $primary: #155e75;
   visibility: hidden;
   transition: all 500ms ease-in-out;
 }
-
+.liked {
+  color: red;
+  fill: red;
+}
 .visible {
   opacity: 1;
   visibility: visible;

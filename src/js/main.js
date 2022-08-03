@@ -19,16 +19,14 @@ const account3 = {
   username: 'll',
   password: 3333,
 };
-const accounts = [account1, account2, account3];
 
-// COMMENTS DATA
+const accounts = [account1, account2, account3];
 
 // ELEMENTS
 const messageWelcome = document.querySelector('.nav-welcome-message');
 const loginForm = document.querySelector('.login-form');
 const inputUsername = document.querySelector('.input-username');
 const inputPassword = document.querySelector('.input-password');
-const postEl = document.querySelector('.post');
 // LOGIN FUNCTION
 let currentAccount = 0;
 let loggedIn = false;
@@ -59,6 +57,7 @@ class View {
       'In terms of fiction that i think tries to have decent science I really enjoyed The Martian and Interstellar',
     likes: 45,
     author: account3.owner,
+    likedByCurrentAccount: false,
   };
 
   _comments = [
@@ -101,15 +100,15 @@ class View {
 }
 
 class postView extends View {
-  _parentEl = postEl;
-
+  _parentEl = document.querySelector('.post');
   markup = this._generateMarkup();
   constructor() {
     super();
-
     this.clear(this._parentEl);
-
     this.render(this._parentEl, this.markup);
+    document
+      .querySelector('.post-like-btn')
+      .addEventListener('click', this._like.bind(this));
   }
   _generateMarkup() {
     const markup = `
@@ -142,23 +141,38 @@ class postView extends View {
       <p class="comments-number m-0">${this._comments.length} comments</p>
     </a>
     <a
-      class="col-auto btn btn-sm btn-light d-flex align-items-center"
+      class="col-auto btn btn-sm btn-light d-flex align-items-center post-like-btn"
        type="button"
-       href="#comments"
+       href="#"
     >
        <svg
          xmlns="http://www.w3.org/2000/svg"          width="20"
          height="20"
          fill="currentColor"
-         class="bi bi-heart me-2"
+         class="bi bi-heart me-2 like-svg"
          viewBox="0 0 16 16"
        >          <path            d="m8 2.748-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"
          />
        </svg>
-      <p class="likes align-self-center m-0">${this._post.likes} likes</p>
+      <p class="likes align-self-center m-0 post-likes">${this._post.likes} likes</p>
      </a>
     `;
     return markup;
+  }
+  _like(e) {
+    const heart = document.querySelector('.like-svg');
+    const likes = document.querySelector('.post-likes');
+    heart.classList.toggle('liked');
+
+    if (this._post.likedByCurrentAccount === false) {
+      this._post.likes++;
+      this._post.likedByCurrentAccount = true;
+      likes.textContent = `${this._post.likes} likes`;
+    } else {
+      this._post.likes--;
+      this._post.likedByCurrentAccount = false;
+      likes.textContent = `${this._post.likes} likes`;
+    }
   }
 }
 
