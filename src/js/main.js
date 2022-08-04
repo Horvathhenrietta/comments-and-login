@@ -101,15 +101,15 @@ class View {
 
 class postView extends View {
   _parentEl = document.querySelector('.post');
-  markup = this._generateMarkup();
   constructor() {
     super();
     this.clear(this._parentEl);
-    this.render(this._parentEl, this.markup);
+    this._generateMarkup();
     document
       .querySelector('.post-like-btn')
       .addEventListener('click', this._like.bind(this));
   }
+  // DISPLAYING THE POST
   _generateMarkup() {
     const markup = `
     <h2 class="post-title mb-4">${this._post.title}</h2>
@@ -157,23 +157,37 @@ class postView extends View {
       <p class="likes align-self-center m-0 post-likes">${this._post.likes} likes</p>
      </a>
     `;
-    return markup;
+    this.render(this._parentEl, markup);
   }
+  // LIKE FUNCTION
   _like(e) {
+    if (loggedIn === false) {
+      alert('Log in first!');
+      return;
+    }
     const heart = document.querySelector('.like-svg');
     const likes = document.querySelector('.post-likes');
-    heart.classList.toggle('liked');
 
     if (this._post.likedByCurrentAccount === false) {
       this._post.likes++;
       this._post.likedByCurrentAccount = true;
       likes.textContent = `${this._post.likes} likes`;
+      heart.classList.add('liked');
     } else {
       this._post.likes--;
       this._post.likedByCurrentAccount = false;
       likes.textContent = `${this._post.likes} likes`;
+      heart.classList.remove('liked');
     }
   }
 }
 
+class CommentsView extends View {
+  _parentEl = document.querySelector('.comment-section');
+  constructor() {
+    super();
+    this.clear(this._parentEl);
+  }
+}
 new postView();
+new CommentsView();
