@@ -1,4 +1,5 @@
 import * as bootstrap from 'bootstrap';
+import moment from 'moment';
 
 // ACCOUNTS DATA
 
@@ -66,14 +67,14 @@ class View {
   _comments = [
     {
       author: account1.owner,
-      submitted: new Date('2022-07-30'),
+      submitted: moment('2022-07-30'),
       content: `If you're interested in real life based movies I'd recommend The Right Stuff or Apollo 13. In terms of fiction there's Interstellar of course and I also liked the show Lost in Space.`,
       replies: [],
       likes: 2,
     },
     {
       author: account2.owner,
-      submitted: new Date('2022-08-30'),
+      submitted: moment('2022-07-29'),
       content: `Sunshine just eeks out my #1 spot over Interstellar. Two films that reward a good sound system and a large screen more than almost anything else.
   
       For a documentary, the recent Apollo 11 doc was similarly awe-inspiring. I was fortunate to see it in the theater and it was quite an experience immersing into all of that high def 1960s footage.`,
@@ -81,7 +82,7 @@ class View {
       replies: [
         {
           author: account1.owner,
-          submitted: new Date('2022-08-30'),
+          submitted: moment('2022-07-30'),
           content: `Sunshine could have been so good, I just cannot understand why they had to bring that alienish aspect in to it, it would have been better without.
   
         If nothing else, just make the survivor a human instead of whatever supernatural it was supposed to be..`,
@@ -89,7 +90,7 @@ class View {
         },
         {
           author: account3.owner,
-          submitted: new Date('2022-08-30'),
+          submitted: moment('2022-07-30'),
           content: `Aw man, no! Sunshine was the spiritual sequel to Event Horizon. If you've not seen Event Horizon, 1. you're living wrong and 2. Sunshine becomes a lot more enjoyable if you know the pedigree.`,
           likes: 8,
         },
@@ -102,7 +103,7 @@ class View {
   }
 
   render(parentEl, markup) {
-    parentEl.insertAdjacentHTML('afterbegin', markup);
+    parentEl.insertAdjacentHTML('beforeend', markup);
   }
 }
 
@@ -191,14 +192,23 @@ class postView extends View {
 
 class CommentsView extends View {
   _parentEl = document.querySelector('.comment-section');
+  _commentFormEl = document.querySelector('.btn-submit');
   constructor() {
     super();
     // Clearing the parent element
     this.clear(this._parentEl);
     // Displaying comments
     this._displayComments();
+    // Add handlers
+    this._addHandlers();
   }
-
+  _addHandlers() {
+    if (loggedIn === false) return;
+    this._commentFormEl.addEventListener(
+      'click',
+      this._submitComment.bind(this)
+    );
+  }
   _displayComments() {
     this._comments.forEach((comment) => {
       const repliesArr = [];
@@ -247,7 +257,7 @@ class CommentsView extends View {
                 <div class="d-flex justify-content-between">
                   <div class="d-flex">
                     <p class="comment-author me-2">${reply.author}</p>
-                    <p class="comment-date fw-light">${reply.submitted}</p>
+                    <p class="comment-date fw-light">${reply.submitted.fromNow()}</p>
                   </div>
                   <div class="button-container d-flex align-items-center">
                   ${
@@ -298,7 +308,7 @@ class CommentsView extends View {
   }
   _generateMarkupComment(comment, replies) {
     const markup = `
-<div class="comment-cont ${comment.replies.length === 0 ? `pb-2` : ``}">     
+<div class="comment-cont mb-4">     
   <div class=" row">
     <div class="comment col-auto me-2 d-flex flex-column align-items-center">
       <button class="btn btn-light btn-sm">
@@ -336,7 +346,7 @@ class CommentsView extends View {
       <div class="d-flex justify-content-between">
         <div class="d-flex">
           <p class="comment-author me-2">${comment.author}</p>
-          <p class="comment-date fw-light">${comment.submitted}</p>
+          <p class="comment-date fw-light">${comment.submitted.fromNow()}</p>
         </div>
         <div class="button-container d-flex align-items-center">
         ${
@@ -394,6 +404,27 @@ class CommentsView extends View {
     
     `;
     this.render(this._parentEl, markup);
+  }
+  _generateCommentObject(comment) {
+    return {
+      author: currentAccount.owner,
+      submitted: moment(),
+      content: comment,
+      replies: [],
+      likes: 0,
+    };
+  }
+  _submitComment(e) {
+    e.preventDefault();
+
+    if (loggedIn === false) {
+      alert('You must log in first');
+      return;
+    }
+    const commentValue = document.querySelector('.comment-value').value;
+    console.log(commentValue);
+    const commentObject = this._generateCommentObject(commentValue);
+    this._generateMarkupComment(commentObject);
   }
 }
 new postView();

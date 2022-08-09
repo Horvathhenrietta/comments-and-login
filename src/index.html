@@ -37,7 +37,10 @@
         <input type="password" placeholder="Password" id="password"    class="form-control input-password" />
         <label class="form-label" for="#password">Password</label>
       </div>
-      <button type="submit" data-bs-dismiss="modal" class="btn btn-primary button-login">Log In</button>
+      <div class="d-grid">
+        <button type="submit" data-bs-dismiss="modal" class="btn btn-primary button-login">Log In</button>
+      </div>
+      
         </form>
       </div>
     </div>
@@ -104,17 +107,21 @@
           </div>
         </div>
         <div class="comment-action border-top border-bottom mt-4 py-4">
+          <form class="comment-submit">
+
+          
           <label for="comment-action-input" class="form-label"
             >Write a comment</label
           >
           <textarea
-            class="form-control mb-3"
+            class="form-control mb-3 comment-value"
             id="comment-action-input"
             rows="3"
           ></textarea>
           <div class="d-flex flex-row-reverse">
-            <button class="btn btn-primary" type="button">Submit</button>
+            <button class="btn btn-primary btn-submit" type="submit">Submit</button>
           </div>
+        </form>
         </div>
 
         <!-- COMMENT SECTION -->
